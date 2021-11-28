@@ -1,3 +1,5 @@
+main.py是tf版本的，main_pytorch.py是pytorch版本的
+
 # GATNE
 
 ### [Project](https://sites.google.com/view/gatne) | [Arxiv](https://arxiv.org/abs/1905.01669)
