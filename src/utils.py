@@ -173,9 +173,9 @@ def generate_pairs(all_walks, vocab, window_size, num_workers):
         for walk in tqdm(walks):
             for i in range(len(walk)):
                 for j in range(1, skip_window + 1):    #j表示离中心词的距离，所以j最小为1，最大为skip_window
-                    if i - j >= 0:
+                    if i - j >= 0:                     #因为j表示离中心词的距离，所以i-j就是左断点，为了防止越界（越出0），所以判断是否大于等于0
                         pairs.append((vocab[walk[i]].index, vocab[walk[i - j]].index, layer_id))
-                    if i + j < len(walk):
+                    if i + j < len(walk):              #因为j表示离中心词的距离，所以i+j就是左断点，为了防止越界（越出len（walk）），所以判断是否小于len(walk)
                         pairs.append((vocab[walk[i]].index, vocab[walk[i + j]].index, layer_id))
     return pairs
 
