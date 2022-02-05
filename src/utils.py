@@ -89,7 +89,7 @@ def load_training_data(f_name):
     all_nodes = list()
     with open(f_name, 'r') as f:
         for line in f:
-            words = line[:-1].split(' ')
+            words = line[:-1].split(' ')       #去除/n
             if words[0] not in edge_data_by_type:
                 edge_data_by_type[words[0]] = list()
             x, y = words[1], words[2]
