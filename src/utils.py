@@ -101,7 +101,7 @@ def load_training_data(f_name):
     return edge_data_by_type
 
 
-def load_testing_data(f_name):
+def load_testing_data(f_name):     #最后一列表明是否有边连接
     print('We are loading data from:', f_name)
     true_edge_data_by_type = dict()
     false_edge_data_by_type = dict()
