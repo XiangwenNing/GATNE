@@ -172,7 +172,7 @@ def generate_pairs(all_walks, vocab, window_size, num_workers):
         print('Generating training pairs for layer', layer_id)
         for walk in tqdm(walks):
             for i in range(len(walk)):
-                for j in range(1, skip_window + 1):
+                for j in range(1, skip_window + 1):    #j表示离中心词的距离，所以j最小为1，最大为skip_window
                     if i - j >= 0:
                         pairs.append((vocab[walk[i]].index, vocab[walk[i - j]].index, layer_id))
                     if i + j < len(walk):
