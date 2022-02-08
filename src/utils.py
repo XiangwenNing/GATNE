@@ -98,7 +98,7 @@ def load_training_data(f_name):
             all_nodes.append(y)
     all_nodes = list(set(all_nodes))
     print('Total training nodes: ' + str(len(all_nodes)))
-    return edge_data_by_type
+    return edge_data_by_type              #是个字典，key是edge类型，value是2个node的二元组
 
 
 def load_testing_data(f_name):     #最后一列表明是否有边连接
