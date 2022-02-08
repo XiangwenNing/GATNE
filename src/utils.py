@@ -81,7 +81,7 @@ def get_G_from_edges(edges):
         u, v = str(edge[0]), str(edge[1])
         edge_dict[u].add(v)
         edge_dict[v].add(u)
-    return edge_dict
+    return edge_dict       #每个类别下，每个节点及他的相连节点
 
 def load_training_data(f_name):
     print('We are loading data from:', f_name)
@@ -152,7 +152,7 @@ def generate_walks(network_data, num_walks, walk_length, schema, file_name, num_
 
     all_walks = []
     for layer_id, layer_name in enumerate(network_data):
-        tmp_data = network_data[layer_name]
+        tmp_data = network_data[layer_name]         #每个类别对应的边边二元组列表
         # start to do the random walk on a layer
 
         layer_walker = RWGraph(get_G_from_edges(tmp_data), node_type, num_workers)
