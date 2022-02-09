@@ -81,7 +81,7 @@ def get_G_from_edges(edges):
         u, v = str(edge[0]), str(edge[1])
         edge_dict[u].add(v)
         edge_dict[v].add(u)
-    return edge_dict       #每个类别下，每个节点及他的相连节点
+    return edge_dict       #每个节点下的相连节点列表
 
 def load_training_data(f_name):
     print('We are loading data from:', f_name)
