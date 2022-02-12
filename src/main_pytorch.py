@@ -169,8 +169,8 @@ def train_model(network_data, feature_dic):
         features = np.zeros((num_nodes, feature_dim), dtype=np.float32)
         for key, value in feature_dic.items():
             if key in vocab:
-                features[vocab[key].index, :] = np.array(value)             #
-        features = torch.FloatTensor(features).to(device)
+                features[vocab[key].index, :] = np.array(value)             #features要按照vocab的index排序
+        features = torch.FloatTensor(features).to(device)                   #features大小：511*142。511是节点个数，142是feature大小
 
     model = GATNEModel(
         num_nodes, embedding_size, embedding_u_size, edge_type_count, dim_a, features
