@@ -22,7 +22,7 @@ def get_batches(pairs, neighbors, batch_size):
             x.append(pairs[index][0])   #word
             y.append(pairs[index][1])   #word的邻居
             t.append(pairs[index][2])   #edge type
-            neigh.append(neighbors[pairs[index][0]])  #word的邻居：edge type*邻居数
+            neigh.append(neighbors[pairs[index][0]])  #大小为64*2*10。64是batch size，2是edge type，10是每个类别下邻居个数
         yield torch.tensor(x), torch.tensor(y), torch.tensor(t), torch.tensor(neigh)
 
 
