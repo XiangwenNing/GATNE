@@ -47,14 +47,14 @@ class GATNEModel(nn.Module):
             self.node_embeddings = Parameter(torch.FloatTensor(num_nodes, embedding_size))
             self.node_type_embeddings = Parameter(
                 torch.FloatTensor(num_nodes, edge_type_count, embedding_u_size)
-            )
+            )     #邻居进行embedding，node_type_embeddings大小为：511*2*10
         self.trans_weights = Parameter(
             torch.FloatTensor(edge_type_count, embedding_u_size, embedding_size)
-        )
+        )         #Mr矩阵，trans_weights大小为：2*10*200
         self.trans_weights_s1 = Parameter(
             torch.FloatTensor(edge_type_count, embedding_u_size, dim_a)
-        )
-        self.trans_weights_s2 = Parameter(torch.FloatTensor(edge_type_count, dim_a, 1))
+        )         #用于计算attention矩阵，大小2*10*20
+        self.trans_weights_s2 = Parameter(torch.FloatTensor(edge_type_count, dim_a, 1))  #用于计算attention矩阵，大小2*20*1
 
         self.reset_parameters()
 
