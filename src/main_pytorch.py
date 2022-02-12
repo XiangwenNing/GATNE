@@ -19,10 +19,10 @@ def get_batches(pairs, neighbors, batch_size):
             index = idx * batch_size + i
             if index >= len(pairs):
                 break
-            x.append(pairs[index][0])
-            y.append(pairs[index][1])
-            t.append(pairs[index][2])
-            neigh.append(neighbors[pairs[index][0]])
+            x.append(pairs[index][0])   #word
+            y.append(pairs[index][1])   #word的邻居
+            t.append(pairs[index][2])   #edge type
+            neigh.append(neighbors[pairs[index][0]])  #word的邻居：edge type*邻居数
         yield torch.tensor(x), torch.tensor(y), torch.tensor(t), torch.tensor(neigh)
 
 
