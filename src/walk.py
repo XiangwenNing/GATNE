@@ -44,7 +44,7 @@ class RWGraph():
 
     def simulate_walks(self, num_walks, walk_length, schema=None):
         all_walks = []
-        nodes = list(self.G.keys())
+        nodes = list(self.G.keys()) #某类别下的所有节点
         random.shuffle(nodes)
 
         if schema is None:
@@ -57,4 +57,6 @@ class RWGraph():
                     walks = list(pool.imap(walk, ((walk_length, node, schema_iter) for node in tqdm(self.node_list(nodes, num_walks)) if schema_iter.split('-')[0] == self.node_type[node]), chunksize=512))
                 all_walks.extend(walks)
 
-        return all_walks
+        return all_walks  #列表里套列表，里面的列表是一次随机游走。return的是某类别下所有的游走序列
+
+    global node_type
