@@ -177,7 +177,7 @@ def generate_pairs(all_walks, vocab, window_size, num_workers):
                         pairs.append((vocab[walk[i]].index, vocab[walk[i - j]].index, layer_id))
                     if i + j < len(walk):              #因为j表示离中心词的距离，所以i+j就是右端点，为了防止越界（越出len（walk）），所以判断是否小于len(walk)
                         pairs.append((vocab[walk[i]].index, vocab[walk[i + j]].index, layer_id))
-    return pairs
+    return pairs                                       #是个列表，每个元素是个三维元组：(节点index，邻居index，所属类别index)
 
 def generate_vocab(all_walks):
     index2word = []
