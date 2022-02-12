@@ -82,8 +82,8 @@ class GATNEModel(nn.Module):
                 for i in range(self.edge_type_count)
             ],
             dim=1,
-        )
-        node_type_embed = torch.sum(node_embed_tmp, dim=2)
+        )                                                #node_embed_tmp大小：64*2*10*10。做法是：64*2*10*2*10变成2个64*10*10，unsqueeze成64*1*10*10，再concat成64*2*10*10                                
+        node_type_embed = torch.sum(node_embed_tmp, dim=2) 
 
         trans_w = self.trans_weights[train_types]
         trans_w_s1 = self.trans_weights_s1[train_types]
