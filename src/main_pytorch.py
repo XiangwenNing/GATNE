@@ -145,10 +145,10 @@ class NSLoss(nn.Module):
 def train_model(network_data, feature_dic):
     vocab, index2word, train_pairs = generate(network_data, args.num_walks, args.walk_length, args.schema, file_name, args.window_size, args.num_workers, args.walk_file)
 
-    edge_types = list(network_data.keys())
+    edge_types = list(network_data.keys())    #edge type
 
     num_nodes = len(index2word)
-    edge_type_count = len(edge_types)
+    edge_type_count = len(edge_types)         #edge type数量
     epochs = args.epoch
     batch_size = args.batch_size
     embedding_size = args.dimensions
