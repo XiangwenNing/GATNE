@@ -71,8 +71,8 @@ class GATNEModel(nn.Module):
 
     def forward(self, train_inputs, train_types, node_neigh):
         if self.features is None:
-            node_embed = self.node_embeddings[train_inputs]
-            node_embed_neighbors = self.node_type_embeddings[node_neigh]
+            node_embed = self.node_embeddings[train_inputs]                 #511*200
+            node_embed_neighbors = self.node_type_embeddings[node_neigh]    
         else:
             node_embed = torch.mm(self.features[train_inputs], self.embed_trans)
             node_embed_neighbors = torch.einsum('bijk,akm->bijam', self.features[node_neigh], self.u_embed_trans)
