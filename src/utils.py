@@ -159,7 +159,7 @@ def generate_walks(network_data, num_walks, walk_length, schema, file_name, num_
         print('Generating random walks for layer', layer_id)
         layer_walks = layer_walker.simulate_walks(num_walks, walk_length, schema=schema)
 
-        all_walks.append(layer_walks)
+        all_walks.append(layer_walks)   #列表大小是edge类别数*num walks*walk length
 
     print('Finish generating the walks')
 
