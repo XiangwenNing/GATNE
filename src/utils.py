@@ -191,7 +191,7 @@ def generate_vocab(all_walks):
 
     vocab = {}
     for word, v in iteritems(raw_vocab):
-        vocab[word] = Vocab(count=v, index=len(index2word))
+        vocab[word] = Vocab(count=v, index=len(index2word)) #dff
         index2word.append(word)
 
     index2word.sort(key=lambda word: vocab[word].count, reverse=True)
