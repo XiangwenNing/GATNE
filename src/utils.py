@@ -191,7 +191,7 @@ def generate_vocab(all_walks):
 
     vocab = {}
     for word, v in iteritems(raw_vocab):
-        vocab[word] = Vocab(count=v, index=len(index2word)) #dff
+        vocab[word] = Vocab(count=v, index=len(index2word)) #vocab是个字典，key是word，value是count频数和index，其中index不是按照某种顺序排的
         index2word.append(word)
 
     index2word.sort(key=lambda word: vocab[word].count, reverse=True)
