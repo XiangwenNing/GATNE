@@ -169,7 +169,7 @@ def train_model(network_data, feature_dic):
         features = np.zeros((num_nodes, feature_dim), dtype=np.float32)
         for key, value in feature_dic.items():
             if key in vocab:
-                features[vocab[key].index, :] = np.array(value)
+                features[vocab[key].index, :] = np.array(value)             #
         features = torch.FloatTensor(features).to(device)
 
     model = GATNEModel(
