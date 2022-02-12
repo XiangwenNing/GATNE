@@ -135,7 +135,7 @@ class NSLoss(nn.Module):
         noise = torch.neg(self.weights[negs])     #noise大小：64*5*200
         sum_log_sampled = torch.sum(
             torch.log(torch.sigmoid(torch.bmm(noise, embs.unsqueeze(2)))), 1
-        ).squeeze()
+        ).squeeze()                               #sum_log_sampled大小：64*5*200 * 64*200*1 = 64*5*1
 
         loss = log_target + sum_log_sampled
         return -loss.sum() / n
