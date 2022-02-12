@@ -44,7 +44,7 @@ class GATNEModel(nn.Module):
             self.embed_trans = Parameter(torch.FloatTensor(feature_dim, embedding_size))
             self.u_embed_trans = Parameter(torch.FloatTensor(edge_type_count, feature_dim, embedding_u_size))
         else:
-            self.node_embeddings = Parameter(torch.FloatTensor(num_nodes, embedding_size))
+            self.node_embeddings = Parameter(torch.FloatTensor(num_nodes, embedding_size))   #大小为：64*200
             self.node_type_embeddings = Parameter(
                 torch.FloatTensor(num_nodes, edge_type_count, embedding_u_size)
             )     #邻居进行embedding，node_type_embeddings大小为：511*2*10
@@ -71,8 +71,8 @@ class GATNEModel(nn.Module):
 
     def forward(self, train_inputs, train_types, node_neigh):
         if self.features is None:
-            node_embed = self.node_embeddings[train_inputs]                 #511*200
-            node_embed_neighbors = self.node_type_embeddings[node_neigh]    
+            node_embed = self.node_embeddings[train_inputs]                 #大小：64*200。64是batch size，200是embedding大小
+            node_embed_neighbors = self.node_type_embeddings[node_neigh]    #大小：64*2*10*2*10。表示每个节点有2个类别，分别有10个邻居。每个邻居有2种类别的embedding
         else:
             node_embed = torch.mm(self.features[train_inputs], self.embed_trans)
             node_embed_neighbors = torch.einsum('bijk,akm->bijam', self.features[node_neigh], self.u_embed_trans)
