@@ -278,14 +278,14 @@ def evaluate(model, true_edges, false_edges):
 
     sorted_pred = prediction_list[:]
     sorted_pred.sort()
-    threshold = sorted_pred[-true_num]
+    threshold = sorted_pred[-true_num]   #threshold是门槛，大于threshold是1，小于threshold是0。
 
     y_pred = np.zeros(len(prediction_list), dtype=np.int32)
     for i in range(len(prediction_list)):
         if prediction_list[i] >= threshold:
-            y_pred[i] = 1
+            y_pred[i] = 1               #y_pred是0和1的值
 
     y_true = np.array(true_list)
-    y_scores = np.array(prediction_list)
+    y_scores = np.array(prediction_list)   #是概率值
     ps, rs, _ = precision_recall_curve(y_true, y_scores)
     return roc_auc_score(y_true, y_scores), f1_score(y_true, y_pred), auc(rs, ps)
