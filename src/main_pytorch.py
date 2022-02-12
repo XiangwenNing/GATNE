@@ -117,7 +117,7 @@ class NSLoss(nn.Module):
                 ]
             ),
             dim=0,
-        )
+        )                                           #self.sample_weights：权重抽样
 
         self.reset_parameters()
 
@@ -129,10 +129,10 @@ class NSLoss(nn.Module):
         log_target = torch.log(
             torch.sigmoid(torch.sum(torch.mul(embs, self.weights[label]), 1))
         )
-        negs = torch.multinomial(
+        negs = torch.multinomial(                #negs大小：64*5。5是负采样大小
             self.sample_weights, self.num_sampled * n, replacement=True
         ).view(n, self.num_sampled)
-        noise = torch.neg(self.weights[negs])
+        noise = torch.neg(self.weights[negs])     #noise大小：64*5*200
         sum_log_sampled = torch.sum(
             torch.log(torch.sigmoid(torch.bmm(noise, embs.unsqueeze(2)))), 1
         ).squeeze()
