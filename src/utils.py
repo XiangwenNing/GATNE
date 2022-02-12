@@ -242,13 +242,13 @@ def generate_neighbors(network_data, vocab, num_nodes, edge_types, neighbor_samp
             neighbors[ix][r].append(iy)
             neighbors[iy][r].append(ix)
         for i in range(num_nodes):
-            if len(neighbors[i][r]) == 0:
-                neighbors[i][r] = [i] * neighbor_samples
-            elif len(neighbors[i][r]) < neighbor_samples:
+            if len(neighbors[i][r]) == 0:                    #节点在这个类别下如果没有节点和它相连，邻居就是节点本身
+                neighbors[i][r] = [i] * neighbor_samples      
+            elif len(neighbors[i][r]) < neighbor_samples:    #节点在这个类别下如果邻居节点数小于采样数，进行重采样
                 neighbors[i][r].extend(list(np.random.choice(neighbors[i][r], size=neighbor_samples-len(neighbors[i][r]))))
-            elif len(neighbors[i][r]) > neighbor_samples:
+            elif len(neighbors[i][r]) > neighbor_samples:    #节点在这个类别下如果邻居节点数大于采样数，进行neighbour数量的采样
                 neighbors[i][r] = list(np.random.choice(neighbors[i][r], size=neighbor_samples))
-    return neighbors
+    return neighbors                                         #是个列表，大小为：
 
 def get_score(local_model, node1, node2):
     try:
