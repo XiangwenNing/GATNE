@@ -80,11 +80,10 @@ class GATNEModel(nn.Module):
             [
                 node_embed_neighbors[:, i, :, i, :].unsqueeze(1)
                 for i in range(self.edge_type_count)
-            ],
-            dim=1,
-        )                                                #node_embed_tmp大小：64*2*10*10。做法是：64*2*10*2*10变成2个64*10*10，unsqueeze成64*1*10*10，再concat成64*2*10*10                                
-        node_type_embed = torch.sum(node_embed_tmp, dim=2) 
-
+            ],                        #node_embed_tmp大小：64*2*10*10。做法是：64*2*10*2*10变成2个64*10*10，unsqueeze成64*1*10*10，再concat成64*2*10*10
+            dim=1,                    #node_embed_tmp含义：如果节点的邻居是节点的第k个edge type下的，那么他的embedding只取第k个embedding。
+        )                             #node_embed_tmp含义：62个节点，每个节点2个 edge type，每个type10个邻居，每个邻居的embedding大小为10                         
+        node_type_embed = torch.sum(node_embed_tmp, dim=2)               #sum就是某edge type下10个邻居求和。所以大小为：64*2*10。10是embedding size
         trans_w = self.trans_weights[train_types]
         trans_w_s1 = self.trans_weights_s1[train_types]
         trans_w_s2 = self.trans_weights_s2[train_types]
