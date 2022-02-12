@@ -217,7 +217,7 @@ def train_model(network_data, feature_dic):
                 }
                 data_iter.write(str(post_fix))
 
-        final_model = dict(zip(edge_types, [dict() for _ in range(edge_type_count)]))         #把embedding存在final_model里
+        final_model = dict(zip(edge_types, [dict() for _ in range(edge_type_count)]))         #把模型得到的embedding存在final_model里
         for i in range(num_nodes):
             train_inputs = torch.tensor([i for _ in range(edge_type_count)]).to(device)
             train_types = torch.tensor(list(range(edge_type_count))).to(device)
