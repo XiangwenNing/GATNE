@@ -40,9 +40,9 @@ class GATNEModel(nn.Module):
         self.features = None
         if features is not None:
             self.features = features
-            feature_dim = self.features.shape[-1]
-            self.embed_trans = Parameter(torch.FloatTensor(feature_dim, embedding_size))
-            self.u_embed_trans = Parameter(torch.FloatTensor(edge_type_count, feature_dim, embedding_u_size))
+            feature_dim = self.features.shape[-1]           #142（feature大小）
+            self.embed_trans = Parameter(torch.FloatTensor(feature_dim, embedding_size))          #142*200
+            self.u_embed_trans = Parameter(torch.FloatTensor(edge_type_count, feature_dim, embedding_u_size))     #2*142*10
         else:
             self.node_embeddings = Parameter(torch.FloatTensor(num_nodes, embedding_size))   #大小为：64*200
             self.node_type_embeddings = Parameter(
