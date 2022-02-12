@@ -71,7 +71,7 @@ class GATNEModel(nn.Module):
 
     def forward(self, train_inputs, train_types, node_neigh):
         if self.features is None:
-            node_embed = self.node_embeddings[train_inputs]                 #大小：64*200。64是batch size，200是embedding大小
+            node_embed = self.node_embeddings[train_inputs]                 #大小：64*200。64是batch size，200是embedding大小。这是base embedding。
             node_embed_neighbors = self.node_type_embeddings[node_neigh]    #大小：64*2*10*2*10。表示每个节点有2个类别，分别有10个邻居。每个邻居有2种类别的embedding
         else:
             node_embed = torch.mm(self.features[train_inputs], self.embed_trans)
