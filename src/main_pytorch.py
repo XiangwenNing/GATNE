@@ -84,18 +84,18 @@ class GATNEModel(nn.Module):
             dim=1,                    #node_embed_tmp含义：如果节点的邻居是节点的第k个edge type下的，那么他的embedding只取第k个embedding。
         )                             #node_embed_tmp含义：62个节点，每个节点2个 edge type，每个type10个邻居，每个邻居的embedding大小为10                         
         node_type_embed = torch.sum(node_embed_tmp, dim=2)               #sum就是某edge type下10个邻居求和。所以大小为：64*2*10。10是embedding size
-        trans_w = self.trans_weights[train_types]
-        trans_w_s1 = self.trans_weights_s1[train_types]
-        trans_w_s2 = self.trans_weights_s2[train_types]
+        trans_w = self.trans_weights[train_types]     #train_types大小是64。trans_w大小是64*10*200 
+        trans_w_s1 = self.trans_weights_s1[train_types]  #trans_w_s1大小：64*10*20
+        trans_w_s2 = self.trans_weights_s2[train_types]  #trans_w_s2大小：64*20*1
 
         attention = F.softmax(
             torch.matmul(
                 torch.tanh(torch.matmul(node_type_embed, trans_w_s1)), trans_w_s2
             ).squeeze(2),
             dim=1,
-        ).unsqueeze(1)
-        node_type_embed = torch.matmul(attention, node_type_embed)
-        node_embed = node_embed + torch.matmul(node_type_embed, trans_w).squeeze(1)
+        ).unsqueeze(1)                                  #attention大小：64*1*2
+        node_type_embed = torch.matmul(attention, node_type_embed)   #64*1*2 * 64*2*10=64*1*10
+        node_embed = node_embed + torch.matmul(node_type_embed, trans_w).squeeze(1)  #加号后面：64*1*10 * 64*10*200 =64*1*200，squeeze成64*200。加号前面也是64*200。
 
         last_node_embed = F.normalize(node_embed, dim=1)
 
