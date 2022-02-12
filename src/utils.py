@@ -132,12 +132,12 @@ def load_node_type(f_name):
             node_type[items[0]] = items[1]
     return node_type
 
-def load_feature_data(f_name):
+def load_feature_data(f_name):         
     feature_dic = {}
     with open(f_name, 'r') as f:
         first = True
         for line in f:
-            if first:
+            if first:                   第一行是节点数和feature大小，所以要跳过
                 first = False
                 continue
             items = line.strip().split()
